@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phishing Simulator – ChainSentinel AI</title>
+    <meta name="description"
+        content="Train your Web3 security instincts with ChainSentinel AI's adaptive phishing and scam simulation environment." />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="logo-icon">🛡️</div>Chain<span>Sentinel</span>&nbsp;AI
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="contract-scanner.html" class="nav-link">Scanner</a>
+            <a href="wallet-guard.html" class="nav-link">Wallet Guard</a>
+            <a href="phishing-sim.html" class="nav-link active">Phishing Sim</a>
+            <a href="threat-feed.html" class="nav-link">Threat Feed</a>
+        </div>
+        <div class="nav-actions">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--accent-purple);">
+                <div class="status-dot"
+                    style="background:var(--accent-purple);box-shadow:0 0 8px var(--accent-purple);"></div>
+                Training Mode
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="eyebrow">🎯 Phishing Simulation Engine</div>
+        <h1>Train Your <span class="text-gradient-purple">Web3 Security</span> Instincts</h1>
+        <p style="max-width:580px;margin:var(--sp-md) auto 0;">AI-generated realistic phishing scenarios test your
+            ability to identify fraudulent dApp connections, fake airdrops, malicious approvals, and wallet drainers —
+            before they cost you real money.</p>
+    </div>
+
+    <div class="container" style="padding-bottom:var(--sp-3xl);">
+
+        <!-- Progress / Score Bar -->
+        <div class="card" style="max-width:800px;margin:0 auto var(--sp-xl);">
+            <div class="flex-between" style="margin-bottom:var(--sp-md);">
+                <div>
+                    <h4 style="margin-bottom:0.2rem;">🎓 Security Training Session</h4>
+                    <p style="margin:0;font-size:0.82rem;">Complete all scenarios to receive your Security Readiness
+                        Score</p>
+                </div>
+                <div style="text-align:center;">
+                    <div style="font-size:1.6rem;font-weight:900;font-family:var(--font-mono);color:var(--accent-purple);"
+                        id="scoreDisplay">0</div>
+                    <div style="font-size:0.7rem;color:var(--text-muted);">SCORE</div>
+                </div>
+            </div>
+            <div class="flex-between" style="margin-bottom:var(--sp-sm);">
+                <span style="font-size:0.78rem;color:var(--text-secondary);">Question <span id="currentQ">1</span> of
+                    <span id="totalQ">5</span></span>
+                <span style="font-size:0.78rem;color:var(--text-secondary);font-family:var(--font-mono);"
+                    id="timeLeft">⏱ 30s</span>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-bar purple" id="quizProgress" style="width:0%"></div>
+            </div>
+        </div>
+
+        <!-- Scenario Panel -->
+        <div style="display:grid;grid-template-columns:1fr 380px;gap:var(--sp-xl);max-width:1100px;margin:0 auto;"
+            id="simLayout">
+            <!-- Quiz Card -->
+            <div class="quiz-card" id="quizCard">
+                <!-- JS renders this -->
+            </div>
+
+            <!-- Sidebar: Hints & Stats -->
+            <div style="display:flex;flex-direction:column;gap:var(--sp-lg);">
+                <div class="card card-sm">
+                    <h4 style="margin-bottom:var(--sp-md);">💡 Detection Tips</h4>
+                    <div id="tipsArea"
+                        style="display:flex;flex-direction:column;gap:0.5rem; font-size:0.82rem; color:var(--text-secondary);">
+                        <div>🔍 Check the full domain name carefully</div>
+                        <div>🔗 Legitimate sites never ask for seed phrases</div>
+                        <div>⚠️ "Unlimited" approvals are almost always risky</div>
+                        <div>🎣 Urgency + free rewards = classic phishing signals</div>
+                        <div>🛡️ Hover links before clicking — check the URL</div>
+                    </div>
+                </div>
+                <div class="card card-sm" id="scoreCard">
+                    <h4 style="margin-bottom:var(--sp-md);">📊 Session Stats</h4>
+                    <div style="display:flex;flex-direction:column;gap:var(--sp-md);">
+                        <div>
+                            <div class="flex-between" style="margin-bottom:0.25rem;"><span
+                                    style="font-size:0.82rem;">Correct</span><span
+                                    style="color:var(--accent-green);font-family:var(--font-mono);"
+                                    id="statCorrect">0</span></div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar green" id="statCorrectBar" style="width:0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-between" style="margin-bottom:0.25rem;"><span
+                                    style="font-size:0.82rem;">Incorrect</span><span
+                                    style="color:var(--accent-red);font-family:var(--font-mono);"
+                                    id="statWrong">0</span></div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar red" id="statWrongBar" style="width:0%"></div>
+                            </div>
+                        </div>
+                        <div class="neon-line"></div>
+                        <div class="flex-between">
+                            <span style="font-size:0.82rem;">Accuracy</span>
+                            <span style="font-family:var(--font-mono);color:var(--accent-cyan);"
+                                id="statAccuracy">—</span>
+                        </div>
+                        <div class="flex-between">
+                            <span style="font-size:0.82rem;">Fastest Answer</span>
+                            <span style="font-family:var(--font-mono);color:var(--text-secondary);"
+                                id="statFastest">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Panel (hidden) -->
+        <div id="resultsPanel" style="display:none;max-width:800px;margin:0 auto;">
+            <div class="card" style="text-align:center;padding:var(--sp-3xl);">
+                <div id="finalIcon" style="font-size:4rem;margin-bottom:1rem;"></div>
+                <h2 id="finalTitle" style="margin-bottom:0.5rem;"></h2>
+                <div id="finalScore"
+                    style="font-size:3.5rem;font-weight:900;font-family:var(--font-mono);margin-bottom:0.5rem;"></div>
+                <p id="finalSubtitle" style="max-width:480px;margin:0 auto 2rem;"></p>
+
+                <div class="grid-3" style="margin-bottom:2rem;" id="finalStats"></div>
+
+                <div class="ai-insight" style="margin-bottom:var(--sp-xl); text-align:left;">
+                    <div class="ai-icon">🧠</div>
+                    <div>
+                        <div class="ai-insight-label">AI Personalized Feedback</div>
+                        <p id="finalAI" style="margin:0;font-size:0.88rem;line-height:1.7;"></p>
+                    </div>
+                </div>
+
+                <div style="display:flex;gap:var(--sp-md);justify-content:center;flex-wrap:wrap;">
+                    <button class="btn btn-primary btn-lg" onclick="location.reload()">🔄 Try Again</button>
+                    <a href="dashboard.html" class="btn btn-ghost btn-lg">📊 Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/phishing.js"></script>
+</body>
+
+</html>

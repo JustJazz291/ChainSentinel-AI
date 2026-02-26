@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainSentinel AI – Web3 Security Intelligence Platform</title>
+  <meta name="description" content="AI-powered real-time threat detection for smart contracts, wallets, and decentralized applications. Protect your Web3 assets with ChainSentinel AI." />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">🛡️</div>
+    Chain<span>Sentinel</span>&nbsp;AI
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Home</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="contract-scanner.html" class="nav-link">Scanner</a>
+    <a href="wallet-guard.html" class="nav-link">Wallet Guard</a>
+    <a href="phishing-sim.html" class="nav-link">Phishing Sim</a>
+    <a href="threat-feed.html" class="nav-link">Threat Feed</a>
+  </div>
+  <div class="nav-actions">
+    <div style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--accent-green)">
+      <div class="status-dot"></div> Live Protection Active
+    </div>
+    <a href="dashboard.html" class="btn btn-primary btn-sm">Launch App →</a>
+  </div>
+</nav>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker-wrap" style="margin-top:68px">
+  <div class="ticker" id="ticker">
+    <span class="ticker-item"><span class="dot"></span> 0x7f4a…3c2e — Contract Audited — Risk Score: 12/100 — SAFE</span>
+    <span class="ticker-item hot"><span class="dot"></span> 0x9b2f…a1d0 — Rug Pull Pattern Detected — CRITICAL</span>
+    <span class="ticker-item"><span class="dot"></span> ETH Phishing Campaign — "MetaMask Upgrade" — Reported x847</span>
+    <span class="ticker-item"><span class="dot"></span> 0x3e8c…f902 — Unlimited Approval Revoked — Risk Mitigated</span>
+    <span class="ticker-item hot"><span class="dot"></span> Flash Loan Attack — $2.4M — Compound Fork — IN PROGRESS</span>
+    <span class="ticker-item"><span class="dot"></span> New Exploit Signature DB — v4.2.1 — Deployed</span>
+    <span class="ticker-item"><span class="dot"></span> 0x7f4a…3c2e — Contract Audited — Risk Score: 12/100 — SAFE</span>
+    <span class="ticker-item hot"><span class="dot"></span> 0x9b2f…a1d0 — Rug Pull Pattern Detected — CRITICAL</span>
+    <span class="ticker-item"><span class="dot"></span> ETH Phishing Campaign — "MetaMask Upgrade" — Reported x847</span>
+    <span class="ticker-item"><span class="dot"></span> 0x3e8c…f902 — Unlimited Approval Revoked — Risk Mitigated</span>
+    <span class="ticker-item hot"><span class="dot"></span> Flash Loan Attack — $2.4M — Compound Fork — IN PROGRESS</span>
+    <span class="ticker-item"><span class="dot"></span> New Exploit Signature DB — v4.2.1 — Deployed</span>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="section grid-bg" style="padding-top: var(--sp-3xl); min-height: 90vh; display:grid; place-items:center;">
+  <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;">
+    <!-- Left -->
+    <div>
+      <div class="page-header" style="padding:0; text-align:left;">
+        <div class="eyebrow">🔒 AI-Powered Web3 Security</div>
+      </div>
+      <h1 class="animate-fade-up" style="margin-bottom:1.25rem;">
+        Proactive Defense for<br/>
+        <span class="text-gradient-cyan">Decentralized</span><br/>
+        Ecosystems
+      </h1>
+      <p class="animate-fade-up delay-1" style="font-size:1.1rem; max-width:500px; margin-bottom:2rem;">
+        ChainSentinel AI detects smart contract exploits, rug pulls, phishing attempts, and malicious token approvals in real-time — before you sign.
+      </p>
+      <div class="animate-fade-up delay-2" style="display:flex; gap:var(--sp-md); flex-wrap:wrap; margin-bottom:2.5rem;">
+        <a href="dashboard.html" class="btn btn-primary btn-lg">🚀 Open Dashboard</a>
+        <a href="contract-scanner.html" class="btn btn-secondary btn-lg">🔍 Scan a Contract</a>
+      </div>
+      <!-- Stats row -->
+      <div class="animate-fade-up delay-3" style="display:flex; gap:2rem; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:1.6rem; font-weight:900; font-family:var(--font-mono); color:var(--accent-cyan);">2.4M+</div>
+          <div style="font-size:0.78rem; color:var(--text-muted); letter-spacing:0.05em;">Contracts Analyzed</div>
+        </div>
+        <div>
+          <div style="font-size:1.6rem; font-weight:900; font-family:var(--font-mono); color:var(--accent-green);">$840M+</div>
+          <div style="font-size:0.78rem; color:var(--text-muted); letter-spacing:0.05em;">Assets Protected</div>
+        </div>
+        <div>
+          <div style="font-size:1.6rem; font-weight:900; font-family:var(--font-mono); color:var(--accent-purple)">99.3%</div>
+          <div style="font-size:0.78rem; color:var(--text-muted); letter-spacing:0.05em;">Detection Accuracy</div>
+        </div>
+        <div>
+          <div style="font-size:1.6rem; font-weight:900; font-family:var(--font-mono); color:var(--accent-orange);">< 50ms</div>
+          <div style="font-size:0.78rem; color:var(--text-muted); letter-spacing:0.05em;">Response Time</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Scanner Visual -->
+    <div style="display:flex; justify-content:center; align-items:center; flex-direction:column; gap:2rem; animation: float 6s ease-in-out infinite;">
+      <div class="scanner-ring">
+        <div class="scanner-inner">
+          <div class="scanner-crosshair"></div>
+          <div class="scanner-sweep"></div>
+          <span style="position:relative; z-index:2; font-size:2.5rem;">🛡️</span>
+        </div>
+      </div>
+      <!-- Floating threat items -->
+      <div style="position:relative; width:280px;">
+        <div class="threat-item warning" style="position:absolute; top:-110px; right:-60px; min-width:220px; animation: float 4s ease-in-out infinite 0.5s;">
+          <div class="threat-icon warning">⚠️</div>
+          <div class="threat-body">
+            <div class="threat-title">Unlimited Approval</div>
+            <div class="threat-desc">0x89ab…c234 — USDC</div>
+          </div>
+        </div>
+        <div class="threat-item critical" style="position:absolute; top:-40px; left:-70px; min-width:220px; animation: float 5s ease-in-out infinite 1s;">
+          <div class="threat-icon critical">🚨</div>
+          <div class="threat-body">
+            <div class="threat-title">Rug Pull Pattern</div>
+            <div class="threat-desc">Liquidity removal detected</div>
+          </div>
+        </div>
+        <div class="threat-item info" style="position:absolute; top:60px; right:-40px; min-width:200px; animation: float 4.5s ease-in-out infinite 1.5s;">
+          <div class="threat-icon info">✅</div>
+          <div class="threat-body">
+            <div class="threat-title">Contract Verified</div>
+            <div class="threat-desc">Risk Score: 8/100</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">Capabilities</div>
+      <h2>Intelligent Security<br/><span class="text-gradient-cyan">Across Every Layer</span></h2>
+      <p>From bytecode analysis to behavioral anomaly detection, ChainSentinel AI provides comprehensive Web3 protection.</p>
+    </div>
+    <div class="grid-3" style="gap:1.5rem;">
+      <div class="card animate-fade-up delay-1">
+        <div class="feature-icon" style="background:rgba(0,212,255,0.12);">🔬</div>
+        <h4 style="margin-bottom:0.5rem;">Smart Contract Analysis</h4>
+        <p style="font-size:0.875rem; margin-bottom:var(--sp-md);">ML-powered bytecode inspection identifies reentrancy, overflow, access control flaws, and known exploit patterns before execution.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="tag">Bytecode Scan</span>
+          <span class="tag">Pattern Match</span>
+          <span class="tag">CVE DB</span>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-2">
+        <div class="feature-icon" style="background:rgba(0,255,136,0.12);">🧠</div>
+        <h4 style="margin-bottom:0.5rem;">Behavioral Anomaly Detection</h4>
+        <p style="font-size:0.875rem; margin-bottom:var(--sp-md);">Real-time transaction graph analysis detects flash loan attacks, pump-and-dump schemes, and wash trading using unsupervised ML.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="tag">Graph Neural Net</span>
+          <span class="tag">Anomaly Score</span>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-3">
+        <div class="feature-icon" style="background:rgba(124,58,237,0.12);">🔐</div>
+        <h4 style="margin-bottom:0.5rem;">Wallet Permission Guard</h4>
+        <p style="font-size:0.875rem; margin-bottom:var(--sp-md);">Decodes token approvals, delegation permissions, and spending limits — alerts users to unlimited or suspicious approvals instantly.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="tag">ERC-20 Allowance</span>
+          <span class="tag">Revoke Tools</span>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-2">
+        <div class="feature-icon" style="background:rgba(255,45,85,0.12);">🎣</div>
+        <h4 style="margin-bottom:0.5rem;">Phishing Simulation Engine</h4>
+        <p style="font-size:0.875rem; margin-bottom:var(--sp-md);">AI-generated phishing scenarios train users to recognize fraudulent dApp connections, fake airdrop pages, and wallet drainers.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="tag">Scenario Engine</span>
+          <span class="tag">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-3">
+        <div class="feature-icon" style="background:rgba(255,140,0,0.12);">📊</div>
+        <h4 style="margin-bottom:0.5rem;">Tokenomics Risk Scoring</h4>
+        <p style="font-size:0.875rem; margin-bottom:var(--sp-md);">Analyzes token distribution, liquidity lock, mint authority, and team wallet concentration to generate rug-pull probability scores.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="tag">Liquidity Check</span>
+          <span class="tag">Mint Analysis</span>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-4">
+        <div class="feature-icon" style="background:rgba(255,215,0,0.10);">⚡</div>
+        <h4 style="margin-bottom:0.5rem;">Real-Time Threat Feed</h4>
+        <p style="font-size:0.875rem; margin-bottom:var(--sp-md);">Live stream of blockchain exploits, scam campaigns, and newly flagged contracts from on-chain monitoring agents and community reports.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="tag">Live API</span>
+          <span class="tag">Multi-Chain</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section" style="background:rgba(8,15,30,0.6);">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">How It Works</div>
+      <h2>From Transaction to<br/><span class="text-gradient-purple">Threat Assessment</span></h2>
+    </div>
+    <div style="display:flex; gap:1.5rem; align-items:flex-start;">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="feature-icon" style="background:rgba(0,212,255,0.12); margin-bottom:0.75rem;">📡</div>
+        <h4>Intercept</h4>
+        <p style="font-size:0.82rem; text-align:center;">Transaction or contract address is captured before signature confirmation</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="feature-icon" style="background:rgba(124,58,237,0.12); margin-bottom:0.75rem;">🔍</div>
+        <h4>Decode & Analyze</h4>
+        <p style="font-size:0.82rem; text-align:center;">ABI decoding, bytecode extraction, and ML inference pipeline runs in &lt;50ms</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="feature-icon" style="background:rgba(0,255,136,0.12); margin-bottom:0.75rem;">🎯</div>
+        <h4>Risk Score</h4>
+        <p style="font-size:0.82rem; text-align:center;">Multi-dimensional threat score (0–100) generated across 14 risk vectors</p>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="feature-icon" style="background:rgba(255,140,0,0.12); margin-bottom:0.75rem;">💬</div>
+        <h4>AI Explanation</h4>
+        <p style="font-size:0.82rem; text-align:center;">Natural language breakdown of threats, written for non-technical users</p>
+      </div>
+      <div class="flow-step" style="position:static;">
+        <div class="step-num">5</div>
+        <div class="feature-icon" style="background:rgba(255,45,85,0.12); margin-bottom:0.75rem;">🛡️</div>
+        <h4>Protect</h4>
+        <p style="font-size:0.82rem; text-align:center;">Block, warn, or proceed with full context — you stay in control</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SUPPORTED CHAINS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <div class="eyebrow">Multi-Chain Support</div>
+      <h2>Protect Assets Across<br/><span class="text-gradient-cyan">Every Major Blockchain</span></h2>
+    </div>
+    <div style="display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
+      <div class="card card-sm" style="display:flex; align-items:center; gap:0.75rem; min-width:160px; justify-content:center;">
+        <span style="font-size:1.8rem;">⟠</span>
+        <div><div style="font-weight:700;">Ethereum</div><div style="font-size:0.72rem;color:var(--text-muted);">EVM</div></div>
+      </div>
+      <div class="card card-sm" style="display:flex; align-items:center; gap:0.75rem; min-width:160px; justify-content:center;">
+        <span style="font-size:1.8rem;">🔴</span>
+        <div><div style="font-weight:700;">Optimism</div><div style="font-size:0.72rem;color:var(--text-muted);">L2</div></div>
+      </div>
+      <div class="card card-sm" style="display:flex; align-items:center; gap:0.75rem; min-width:160px; justify-content:center;">
+        <span style="font-size:1.8rem;">🟣</span>
+        <div><div style="font-weight:700;">Arbitrum</div><div style="font-size:0.72rem;color:var(--text-muted);">L2</div></div>
+      </div>
+      <div class="card card-sm" style="display:flex; align-items:center; gap:0.75rem; min-width:160px; justify-content:center;">
+        <span style="font-size:1.8rem;">🦊</span>
+        <div><div style="font-weight:700;">Polygon</div><div style="font-size:0.72rem;color:var(--text-muted);">PoS</div></div>
+      </div>
+      <div class="card card-sm" style="display:flex; align-items:center; gap:0.75rem; min-width:160px; justify-content:center;">
+        <span style="font-size:1.8rem;">🌙</span>
+        <div><div style="font-weight:700;">BNB Chain</div><div style="font-size:0.72rem;color:var(--text-muted);">EVM</div></div>
+      </div>
+      <div class="card card-sm" style="display:flex; align-items:center; gap:0.75rem; min-width:160px; justify-content:center;">
+        <span style="font-size:1.8rem;">❄️</span>
+        <div><div style="font-weight:700;">Avalanche</div><div style="font-size:0.72rem;color:var(--text-muted);">C-Chain</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RECENT THREATS ===== -->
+<section class="section" style="background:rgba(8,15,30,0.6);">
+  <div class="container">
+    <div class="flex-between" style="margin-bottom:var(--sp-xl);">
+      <div>
+        <h2 style="margin-bottom:0.5rem;">Recent <span class="text-gradient-cyan">Threat Intelligence</span></h2>
+        <p style="margin:0;">Live detections across monitored chains</p>
+      </div>
+      <a href="threat-feed.html" class="btn btn-secondary">View All Threats →</a>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:0.75rem;" id="recent-threats">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section">
+  <div class="container">
+    <div class="card" style="text-align:center; background:linear-gradient(135deg, rgba(0,102,255,0.12), rgba(124,58,237,0.12)); border-color:rgba(0,212,255,0.25); padding:4rem 2rem;">
+      <div class="eyebrow" style="margin:0 auto var(--sp-lg);">Ready to Protect Your Assets?</div>
+      <h2 style="margin-bottom:1rem;">Stop Signing Blind.<br/><span class="text-gradient-cyan">Start Signing Smart.</span></h2>
+      <p style="max-width:500px; margin:0 auto 2rem;">ChainSentinel AI wraps every transaction with AI-driven threat analysis. Launch the dashboard and connect your wallet in under 30 seconds.</p>
+      <div style="display:flex; gap:var(--sp-md); justify-content:center; flex-wrap:wrap;">
+        <a href="dashboard.html" class="btn btn-primary btn-lg">🚀 Get Started Free</a>
+        <a href="contract-scanner.html" class="btn btn-ghost btn-lg">🔬 Try the Scanner</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background:var(--bg-secondary); border-top:1px solid var(--border); padding:3rem 0 2rem;">
+  <div class="container">
+    <div class="grid-4" style="margin-bottom:2.5rem;">
+      <div>
+        <a href="index.html" class="nav-logo" style="margin-bottom:1rem; display:inline-flex;">
+          <div class="logo-icon">🛡️</div>
+          Chain<span>Sentinel</span>&nbsp;AI
+        </a>
+        <p style="font-size:0.82rem; max-width:220px; margin-top:0.75rem;">AI-powered security intelligence for the decentralized web.</p>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:1rem; font-size:0.875rem;">Platform</div>
+        <div style="display:flex; flex-direction:column; gap:0.5rem;">
+          <a href="dashboard.html" style="font-size:0.82rem; color:var(--text-muted); transition:color 0.2s;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--text-muted)'">Dashboard</a>
+          <a href="contract-scanner.html" style="font-size:0.82rem; color:var(--text-muted); transition:color 0.2s;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--text-muted)'">Contract Scanner</a>
+          <a href="wallet-guard.html" style="font-size:0.82rem; color:var(--text-muted); transition:color 0.2s;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--text-muted)'">Wallet Guard</a>
+          <a href="phishing-sim.html" style="font-size:0.82rem; color:var(--text-muted); transition:color 0.2s;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--text-muted)'">Phishing Simulator</a>
+          <a href="threat-feed.html" style="font-size:0.82rem; color:var(--text-muted); transition:color 0.2s;" onmouseover="this.style.color='var(--accent-cyan)'" onmouseout="this.style.color='var(--text-muted)'">Threat Feed</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:1rem; font-size:0.875rem;">Security</div>
+        <div style="display:flex; flex-direction:column; gap:0.5rem;">
+          <span style="font-size:0.82rem; color:var(--text-muted);">Smart Contract Audits</span>
+          <span style="font-size:0.82rem; color:var(--text-muted);">Token Risk Analysis</span>
+          <span style="font-size:0.82rem; color:var(--text-muted);">Exploit Signatures</span>
+          <span style="font-size:0.82rem; color:var(--text-muted);">Anomaly Detection</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:1rem; font-size:0.875rem;">System Status</div>
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem;">
+            <div class="status-dot"></div> AI Engine — Online
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem;">
+            <div class="status-dot"></div> Threat DB — Synced
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem; font-size:0.82rem;">
+            <div class="status-dot"></div> Chain Monitors — Active
+          </div>
+          <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.5rem; font-family:var(--font-mono);">Uptime: 99.98% (30d)</div>
+        </div>
+      </div>
+    </div>
+    <div class="neon-line"></div>
+    <div class="flex-between" style="flex-wrap:wrap; gap:1rem;">
+      <div style="font-size:0.78rem; color:var(--text-muted);">© 2026 ChainSentinel AI — Prototype. All rights reserved.</div>
+      <div style="font-size:0.78rem; color:var(--text-muted);">Built for Web3 Security Research × AI Innovation</div>
+    </div>
+  </div>
+</footer>
+
+<script src="scripts/main.js"></script>
+<script>
+// Recent threats for landing page
+const landingThreats = [
+  { sev:'critical', icon:'🚨', title:'Flash Loan Attack Detected', desc:'0x1a2b…3c4d — Uniswap V2 Fork — Profit: $1.2M USDC', time:'2m ago', chain:'ETH' },
+  { sev:'warning',  icon:'⚠️', title:'Rug Pull Pattern Identified', desc:'0xd34f…9a0c — Liquidity removed 94% — TokenX/ETH Pair', time:'15m ago', chain:'BSC' },
+  { sev:'info',     icon:'🔬', title:'Suspicious Contract Flagged', desc:'0x99fe…5510 — Unverified bytecode, hidden mint function', time:'1h ago', chain:'ARB' },
+  { sev:'critical', icon:'🎣', title:'Phishing Domain Campaign', desc:'"metamask-offlcial[.]net" actively draining wallets', time:'3h ago', chain:'Multi' },
+];
+const container = document.getElementById('recent-threats');
+landingThreats.forEach(t => {
+  container.innerHTML += `
+    <div class="threat-item ${t.sev}">
+      <div class="threat-icon ${t.sev}">${t.icon}</div>
+      <div class="threat-body">
+        <div class="threat-title">${t.title}</div>
+        <div class="threat-desc">${t.desc}</div>
+        <div class="threat-meta">
+          <span class="badge ${t.sev==='critical'?'badge-danger':t.sev==='warning'?'badge-warning':'badge-info'}">${t.sev}</span>
+          <span class="tag">${t.chain}</span>
+          <span class="threat-time">${t.time}</span>
+        </div>
+      </div>
+    </div>`;
+});
+</script>
+</body>
+</html>

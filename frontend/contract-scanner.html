@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contract Scanner – ChainSentinel AI</title>
+    <meta name="description"
+        content="AI-powered smart contract vulnerability scanner. Detect reentrancy, overflow, access control flaws, and known exploits in real-time." />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="logo-icon">🛡️</div>Chain<span>Sentinel</span>&nbsp;AI
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="contract-scanner.html" class="nav-link active">Scanner</a>
+            <a href="wallet-guard.html" class="nav-link">Wallet Guard</a>
+            <a href="phishing-sim.html" class="nav-link">Phishing Sim</a>
+            <a href="threat-feed.html" class="nav-link">Threat Feed</a>
+        </div>
+        <div class="nav-actions">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--accent-green);">
+                <div class="status-dot"></div> Scanner Ready
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="eyebrow">🔬 Smart Contract Scanner</div>
+        <h1>AI-Powered Contract <span class="text-gradient-cyan">Vulnerability Analysis</span></h1>
+        <p style="max-width:560px; margin:var(--sp-md) auto 0;">Submit a contract address or paste Solidity source code.
+            Our ML pipeline will scan for exploits, reentrancy, access control flaws, and rug-pull patterns in &lt;50ms.
+        </p>
+    </div>
+
+    <div class="container" style="padding-bottom:var(--sp-3xl);">
+
+        <!-- Input Card -->
+        <div class="card" style="max-width:800px;margin:0 auto var(--sp-xl);">
+            <div style="display:flex;gap:var(--sp-sm);margin-bottom:var(--sp-lg);">
+                <button class="btn btn-primary btn-sm" id="tabAddr" onclick="switchTab('addr')">📍 Contract
+                    Address</button>
+                <button class="btn btn-ghost btn-sm" id="tabSrc" onclick="switchTab('src')">📄 Source Code</button>
+            </div>
+
+            <div id="panelAddr">
+                <div class="input-group" style="margin-bottom:var(--sp-md);">
+                    <label class="input-label">Contract Address</label>
+                    <input id="contractAddr" class="input input-mono" type="text"
+                        placeholder="0x742d35Cc6634C0532925a3b844Bc9e7595f6e842" />
+                </div>
+                <div class="input-group" style="margin-bottom:var(--sp-md);">
+                    <label class="input-label">Blockchain Network</label>
+                    <select class="input" id="chainSelect">
+                        <option value="eth">⟠ Ethereum Mainnet</option>
+                        <option value="arb">🟣 Arbitrum One</option>
+                        <option value="bsc">🌙 BNB Smart Chain</option>
+                        <option value="pol">🦊 Polygon PoS</option>
+                        <option value="opt">🔴 Optimism</option>
+                        <option value="avax">❄️ Avalanche C-Chain</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="panelSrc" style="display:none;">
+                <div class="input-group" style="margin-bottom:var(--sp-md);">
+                    <label class="input-label">Paste Solidity Source</label>
+                    <textarea class="input input-mono" id="sourceCode" rows="8"
+                        placeholder="// SPDX-License-Identifier: MIT&#10;pragma solidity ^0.8.0;&#10;&#10;contract MyToken { ... }"></textarea>
+                </div>
+            </div>
+
+            <div style="display:flex;gap:var(--sp-md);flex-wrap:wrap;">
+                <button class="btn btn-primary" id="scanBtn" onclick="startScan()" style="flex:1;">🔬 Analyze
+                    Contract</button>
+                <button class="btn btn-ghost btn-sm" onclick="loadDemoContract()">📋 Load Demo</button>
+            </div>
+        </div>
+
+        <!-- Scanning State -->
+        <div id="scanningState" style="display:none; text-align:center; padding:3rem 0;">
+            <div class="spinner spinner-lg" style="margin:0 auto 1.5rem;"></div>
+            <h3 style="margin-bottom:0.5rem; color:var(--accent-cyan);">AI Analysis In Progress…</h3>
+            <p id="scanStatus">Fetching contract bytecode…</p>
+            <div style="max-width:400px;margin:1.5rem auto;">
+                <div class="progress-wrap">
+                    <div class="progress-bar cyan" id="scanProgress" style="width:0%;transition:width 0.4s;"></div>
+                </div>
+                <div
+                    style="display:flex;justify-content:space-between;margin-top:0.5rem;font-size:0.75rem;color:var(--text-muted);">
+                    <span>Bytecode Decode</span><span>ML Inference</span><span>Risk Scoring</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results -->
+        <div id="results" style="display:none;">
+            <!-- Header -->
+            <div class="card"
+                style="margin-bottom:var(--sp-xl); display:flex; align-items:center; gap:var(--sp-xl); flex-wrap:wrap;">
+                <div id="riskGauge" style="text-align:center; min-width:140px;">
+                    <!-- JS fills this -->
+                </div>
+                <div style="flex:1; min-width:200px;">
+                    <div id="riskBadge" style="margin-bottom:0.5rem;"></div>
+                    <h3 id="riskTitle" style="margin-bottom:0.5rem;"></h3>
+                    <p id="riskDesc" style="margin:0; font-size:0.88rem;"></p>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:var(--sp-sm); text-align:right;">
+                    <div style="font-size:0.75rem; color:var(--text-muted);">Scanned Contract</div>
+                    <div class="wallet-address"><span id="scannedAddr" style="color:var(--accent-cyan);"></span></div>
+                    <div style="font-size:0.72rem; color:var(--text-muted);" id="scanMeta"></div>
+                </div>
+            </div>
+
+            <!-- Vulnerability List -->
+            <div class="grid-2" style="margin-bottom:var(--sp-xl);">
+                <div class="card">
+                    <h4 style="margin-bottom:var(--sp-lg);">⚠️ Identified Vulnerabilities</h4>
+                    <div id="vulnList" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+                </div>
+                <div class="card">
+                    <h4 style="margin-bottom:var(--sp-lg);">📊 Risk Breakdown</h4>
+                    <div id="riskBreakdown" style="display:flex; flex-direction:column; gap:var(--sp-md);"></div>
+                </div>
+            </div>
+
+            <!-- Code View -->
+            <div class="card" style="margin-bottom:var(--sp-xl);">
+                <div class="flex-between" style="margin-bottom:var(--sp-md);">
+                    <h4>📄 Annotated Bytecode / Source</h4>
+                    <button class="code-copy-btn" onclick="CS.toast('Code copied!','success')">Copy</button>
+                </div>
+                <div class="code-block" id="codeView"></div>
+            </div>
+
+            <!-- AI Explanation -->
+            <div class="ai-insight" style="margin-bottom:var(--sp-xl);">
+                <div class="ai-icon">🧠</div>
+                <div style="flex:1;">
+                    <div class="ai-insight-label">AI Security Assessment</div>
+                    <p id="aiExplanation" style="margin:0; line-height:1.8;"></p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div style="display:flex; gap:var(--sp-md); flex-wrap:wrap;">
+                <button class="btn btn-danger" onclick="CS.toast('Report submitted to global threat DB','danger')">🚨
+                    Report as Threat</button>
+                <button class="btn btn-secondary" onclick="CS.toast('PDF report generated','success')">📄 Export
+                    Report</button>
+                <button class="btn btn-ghost" onclick="resetScanner()">🔄 Scan Another</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/scanner.js"></script>
+</body>
+
+</html>

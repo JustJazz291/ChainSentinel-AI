@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard – ChainSentinel AI</title>
+    <meta name="description"
+        content="ChainSentinel AI security dashboard — real-time threat monitoring, risk analytics, and wallet health overview." />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="logo-icon">🛡️</div>
+            Chain<span>Sentinel</span>&nbsp;AI
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link active">Dashboard</a>
+            <a href="contract-scanner.html" class="nav-link">Scanner</a>
+            <a href="wallet-guard.html" class="nav-link">Wallet Guard</a>
+            <a href="phishing-sim.html" class="nav-link">Phishing Sim</a>
+            <a href="threat-feed.html" class="nav-link">Threat Feed</a>
+        </div>
+        <div class="nav-actions">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--accent-green);">
+                <div class="status-dot"></div> AI Engine Active
+            </div>
+            <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);" class="live-clock">
+            </div>
+        </div>
+    </nav>
+
+    <!-- LAYOUT -->
+    <div class="layout-with-sidebar">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-label">Overview</div>
+            <div class="sidebar-section">
+                <a href="dashboard.html" class="sidebar-link active"><span class="icon">📊</span> Dashboard</a>
+                <a href="threat-feed.html" class="sidebar-link"><span class="icon">⚡</span> Threat Feed <span
+                        class="count">12</span></a>
+                <a href="#" class="sidebar-link"><span class="icon">🔔</span> Alerts <span class="count">3</span></a>
+            </div>
+            <div class="sidebar-label">Tools</div>
+            <div class="sidebar-section">
+                <a href="contract-scanner.html" class="sidebar-link"><span class="icon">🔬</span> Contract Scanner</a>
+                <a href="wallet-guard.html" class="sidebar-link"><span class="icon">🔐</span> Wallet Guard</a>
+                <a href="phishing-sim.html" class="sidebar-link"><span class="icon">🎯</span> Phishing Sim</a>
+                <a href="#" class="sidebar-link"><span class="icon">📝</span> Report Generator</a>
+            </div>
+            <div class="sidebar-label">Chains</div>
+            <div class="sidebar-section">
+                <a href="#" class="sidebar-link"><span class="icon">⟠</span> Ethereum</a>
+                <a href="#" class="sidebar-link"><span class="icon">🟣</span> Arbitrum</a>
+                <a href="#" class="sidebar-link"><span class="icon">🦊</span> Polygon</a>
+                <a href="#" class="sidebar-link"><span class="icon">🌙</span> BNB Chain</a>
+            </div>
+            <div class="sidebar-label">Account</div>
+            <div class="sidebar-section">
+                <a href="#" class="sidebar-link"><span class="icon">⚙️</span> Settings</a>
+                <a href="#" class="sidebar-link"><span class="icon">📖</span> API Docs</a>
+            </div>
+            <!-- Wallet snippet -->
+            <div
+                style="margin:1rem; padding:1rem; background:rgba(0,212,255,0.06); border:1px solid rgba(0,212,255,0.2); border-radius:var(--r-md);">
+                <div
+                    style="font-size:0.7rem; color:var(--text-muted); margin-bottom:0.4rem; text-transform:uppercase; letter-spacing:0.06em;">
+                    Connected Wallet</div>
+                <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-cyan);">0x7f4a…3c2e
+                </div>
+                <div style="font-size:0.7rem; color:var(--text-muted); margin-top:0.3rem;">⟠ Ethereum Mainnet</div>
+                <div style="margin-top:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                    <div class="status-dot" style="width:6px;height:6px;"></div>
+                    <span style="font-size:0.72rem; color:var(--accent-green);">Protected</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- Header row -->
+            <div class="flex-between" style="margin-bottom:var(--sp-xl);">
+                <div>
+                    <h2 style="margin-bottom:0.25rem;">Security <span class="text-gradient-cyan">Dashboard</span></h2>
+                    <p style="margin:0; font-size:0.875rem;">Real-time threat intelligence across your monitored assets
+                    </p>
+                </div>
+                <div style="display:flex;gap:0.75rem;">
+                    <button class="btn btn-ghost btn-sm" onclick="CS.toast('Dashboard refreshed','success')">🔄
+                        Refresh</button>
+                    <a href="contract-scanner.html" class="btn btn-primary btn-sm">🔬 Scan Contract</a>
+                </div>
+            </div>
+
+            <!-- Critical Alert -->
+            <div class="alert alert-danger" style="margin-bottom:var(--sp-xl);">
+                <span style="font-size:1.2rem;">🚨</span>
+                <div>
+                    <div style="font-weight:700; margin-bottom:0.2rem;">Critical: Flash Loan Attack In Progress</div>
+                    <div>0x1a2b…3c4d targeting Compound fork — estimated exposure: $2.4M USDC — <a
+                            href="threat-feed.html" style="color:inherit;text-decoration:underline;">View Details →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stat Cards -->
+            <div class="grid-4" style="margin-bottom:var(--sp-xl);">
+                <div class="stat-card">
+                    <div style="font-size:1.3rem;">🛡️</div>
+                    <div class="stat-value text-gradient-cyan" id="stat-contracts">0</div>
+                    <div class="stat-label">Contracts Scanned</div>
+                    <div class="stat-delta up">↑ 142 today</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size:1.3rem;">🚨</div>
+                    <div class="stat-value" style="color:var(--accent-red);" id="stat-threats">0</div>
+                    <div class="stat-label">Active Threats</div>
+                    <div class="stat-delta down">↑ 3 new in 1h</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size:1.3rem;">💰</div>
+                    <div class="stat-value text-gradient-green" id="stat-saved">$0</div>
+                    <div class="stat-label">Assets Protected</div>
+                    <div class="stat-delta up">↑ $82K this week</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size:1.3rem;">🎯</div>
+                    <div class="stat-value" style="color:var(--accent-purple);" id="stat-accuracy">0%</div>
+                    <div class="stat-label">Detection Accuracy</div>
+                    <div class="stat-delta up">↑ 0.2% this month</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid-2" style="margin-bottom:var(--sp-xl);">
+                <!-- Threat Trend Chart -->
+                <div class="card">
+                    <div class="flex-between" style="margin-bottom:var(--sp-lg);">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem;">Threat Detection Trend</h4>
+                            <p style="font-size:0.78rem; margin:0;">Last 30 days</p>
+                        </div>
+                        <div style="display:flex; gap:0.5rem;">
+                            <span class="badge badge-danger">● Critical</span>
+                            <span class="badge badge-warning">● Warning</span>
+                        </div>
+                    </div>
+                    <canvas id="trendChart" width="400" height="180" style="width:100%;"></canvas>
+                </div>
+
+                <!-- Risk Distribution -->
+                <div class="card">
+                    <div class="flex-between" style="margin-bottom:var(--sp-lg);">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem;">Risk Distribution</h4>
+                            <p style="font-size:0.78rem; margin:0;">By contract category</p>
+                        </div>
+                        <span class="badge badge-info">Last 7d</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:var(--sp-md);">
+                        <div>
+                            <div class="flex-between" style="margin-bottom:0.3rem;">
+                                <span style="font-size:0.82rem;">DeFi Protocols</span>
+                                <span
+                                    style="font-size:0.82rem; font-family:var(--font-mono); color:var(--accent-red);">64%</span>
+                            </div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar red" id="pb1" style="width:0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-between" style="margin-bottom:0.3rem;">
+                                <span style="font-size:0.82rem;">NFT Contracts</span>
+                                <span
+                                    style="font-size:0.82rem; font-family:var(--font-mono); color:var(--accent-orange);">28%</span>
+                            </div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar" id="pb2" style="width:0%;background:var(--accent-orange)">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-between" style="margin-bottom:0.3rem;">
+                                <span style="font-size:0.82rem;">Token Launches</span>
+                                <span
+                                    style="font-size:0.82rem; font-family:var(--font-mono); color:var(--accent-purple);">52%</span>
+                            </div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar purple" id="pb3" style="width:0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-between" style="margin-bottom:0.3rem;">
+                                <span style="font-size:0.82rem;">Bridges & Cross-chain</span>
+                                <span
+                                    style="font-size:0.82rem; font-family:var(--font-mono); color:var(--accent-cyan);">81%</span>
+                            </div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar cyan" id="pb4" style="width:0%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex-between" style="margin-bottom:0.3rem;">
+                                <span style="font-size:0.82rem;">Governance Contracts</span>
+                                <span
+                                    style="font-size:0.82rem; font-family:var(--font-mono); color:var(--accent-green);">17%</span>
+                            </div>
+                            <div class="progress-wrap">
+                                <div class="progress-bar green" id="pb5" style="width:0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Row -->
+            <div class="grid-2" style="margin-bottom:var(--sp-xl);">
+                <!-- Recent Scans -->
+                <div class="card">
+                    <div class="flex-between" style="margin-bottom:var(--sp-lg);">
+                        <h4>Recent Contract Scans</h4>
+                        <a href="contract-scanner.html" class="btn btn-ghost btn-sm">View All</a>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Address</th>
+                                <th>Chain</th>
+                                <th>Risk</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentScansTable"></tbody>
+                    </table>
+                </div>
+
+                <!-- Live Threat Feed Preview -->
+                <div class="card">
+                    <div class="flex-between" style="margin-bottom:var(--sp-lg);">
+                        <h4>Live Threat Activity</h4>
+                        <div
+                            style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--accent-green);">
+                            <div class="status-dot"></div> Live
+                        </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:0.6rem;" id="liveFeed"></div>
+                    <a href="threat-feed.html" class="btn btn-ghost btn-sm"
+                        style="margin-top:var(--sp-md);width:100%;justify-content:center;">View Full Feed →</a>
+                </div>
+            </div>
+
+            <!-- AI Insights -->
+            <div class="card" style="margin-bottom:var(--sp-xl);">
+                <h4 style="margin-bottom:var(--sp-lg);">🧠 AI Security Insights</h4>
+                <div class="grid-3">
+                    <div class="ai-insight">
+                        <div class="ai-icon">🧠</div>
+                        <div>
+                            <div class="ai-insight-label">Pattern Alert</div>
+                            <p>Reentrancy attack patterns have increased 340% on Ethereum this week. Contracts calling
+                                external addresses before state updates are highest risk.</p>
+                        </div>
+                    </div>
+                    <div class="ai-insight">
+                        <div class="ai-icon">📊</div>
+                        <div>
+                            <div class="ai-insight-label">Market Behavior</div>
+                            <p>3 new memecoin launches flagged with >90% token concentration in deployer wallets.
+                                Classic rug-pull precursor signature detected.</p>
+                        </div>
+                    </div>
+                    <div class="ai-insight">
+                        <div class="ai-icon">⚡</div>
+                        <div>
+                            <div class="ai-insight-label">Flash Loan Risk</div>
+                            <p>Aave V3 fork vulnerability being exploited via price oracle manipulation. Single-block
+                                attack window. Update price oracle to TWAP immediately.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chain Health Grid -->
+            <div class="card">
+                <h4 style="margin-bottom:var(--sp-lg);">⛓️ Chain Security Status</h4>
+                <div class="grid-4">
+                    <div id="chainStatus"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/dashboard.js"></script>
+</body>
+
+</html>

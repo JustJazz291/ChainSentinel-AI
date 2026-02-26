@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Threat Feed – ChainSentinel AI</title>
+    <meta name="description"
+        content="Real-time blockchain threat intelligence — live exploit tracking, scam campaigns, flagged contracts, and wallet drain events across all major chains." />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="logo-icon">🛡️</div>Chain<span>Sentinel</span>&nbsp;AI
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="contract-scanner.html" class="nav-link">Scanner</a>
+            <a href="wallet-guard.html" class="nav-link">Wallet Guard</a>
+            <a href="phishing-sim.html" class="nav-link">Phishing Sim</a>
+            <a href="threat-feed.html" class="nav-link active">Threat Feed</a>
+        </div>
+        <div class="nav-actions">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--accent-red);">
+                <div class="status-dot" style="background:var(--accent-red);box-shadow:0 0 8px var(--accent-red);">
+                </div>
+                LIVE MONITORING
+            </div>
+            <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);" class="live-clock">
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <div class="eyebrow">⚡ Live Threat Intelligence Feed</div>
+        <h1>Real-Time Blockchain <span class="text-gradient-cyan">Security Events</span></h1>
+        <p style="max-width:560px;margin:var(--sp-md) auto 0;">Live stream of exploits, rug pulls, phishing campaigns,
+            and suspicious contracts detected across Ethereum, Arbitrum, BSC, Polygon, and more.</p>
+    </div>
+
+    <div class="container" style="padding-bottom:var(--sp-3xl);">
+
+        <!-- Overview Stats -->
+        <div class="grid-4" style="margin-bottom:var(--sp-xl);">
+            <div class="stat-card" style="border-color:rgba(255,45,85,0.3);">
+                <div style="font-size:1.2rem;">🚨</div>
+                <div class="stat-value" style="color:var(--accent-red);" id="countCritical">0</div>
+                <div class="stat-label">Critical (24h)</div>
+                <div style="display:flex;align-items:center;gap:0.4rem;margin-top:0.3rem;">
+                    <div class="status-dot" style="background:var(--accent-red);box-shadow:0 0 8px var(--accent-red);">
+                    </div><span style="font-size:0.72rem;color:var(--accent-red);">Live</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size:1.2rem;">⚠️</div>
+                <div class="stat-value" style="color:var(--accent-orange);" id="countWarning">0</div>
+                <div class="stat-label">Warnings (24h)</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size:1.2rem;">💸</div>
+                <div class="stat-value text-gradient-cyan" id="countUSD">$0</div>
+                <div class="stat-label">At Risk (24h)</div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size:1.2rem;">⛓️</div>
+                <div class="stat-value" style="color:var(--accent-green);" id="countChains">0</div>
+                <div class="stat-label">Chains Monitored</div>
+            </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 340px;gap:var(--sp-xl);">
+
+            <!-- Main Feed -->
+            <div>
+                <!-- Filter Bar -->
+                <div class="card card-sm" style="margin-bottom:var(--sp-lg);">
+                    <div class="flex-between" style="flex-wrap:wrap;gap:var(--sp-md);">
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;" id="filterBtns">
+                            <button class="btn btn-danger btn-sm active-filter" onclick="filterFeed('all',this)"
+                                id="fAll">All Events</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterFeed('critical',this)">🚨
+                                Critical</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterFeed('warning',this)">⚠️
+                                Warnings</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterFeed('info',this)">ℹ️ Info</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterFeed('rug',this)">🪤 Rug Pulls</button>
+                            <button class="btn btn-ghost btn-sm" onclick="filterFeed('phishing',this)">🎣
+                                Phishing</button>
+                        </div>
+                        <div style="display:flex;gap:0.5rem;">
+                            <select class="input" id="chainFilter" onchange="renderFeed()"
+                                style="padding:0.4rem 0.75rem;font-size:0.8rem;max-width:140px;">
+                                <option value="all">All Chains</option>
+                                <option value="ETH">Ethereum</option>
+                                <option value="BSC">BNB Chain</option>
+                                <option value="ARB">Arbitrum</option>
+                                <option value="POL">Polygon</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feed Items -->
+                <div id="feedContainer" style="display:flex;flex-direction:column;gap:0.75rem;"></div>
+
+                <!-- Load More -->
+                <div style="text-align:center;margin-top:var(--sp-xl);">
+                    <button class="btn btn-ghost" onclick="loadMore()">⬇️ Load More Events</button>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div style="display:flex;flex-direction:column;gap:var(--sp-lg);">
+
+                <!-- Active Exploits -->
+                <div class="card card-sm">
+                    <h4 style="margin-bottom:var(--sp-md);">🔥 Active Exploits</h4>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;" id="activeExploits"></div>
+                </div>
+
+                <!-- Chain Risk Map -->
+                <div class="card card-sm">
+                    <h4 style="margin-bottom:var(--sp-md);">🗺️ Chain Risk Levels</h4>
+                    <div style="display:flex;flex-direction:column;gap:var(--sp-md);" id="chainRiskMap"></div>
+                </div>
+
+                <!-- Top Scam Types -->
+                <div class="card card-sm">
+                    <h4 style="margin-bottom:var(--sp-md);">📊 Top Attack Vectors (24h)</h4>
+                    <div style="display:flex;flex-direction:column;gap:var(--sp-md);" id="attackVectors"></div>
+                </div>
+
+                <!-- Subscribe -->
+                <div class="card card-sm"
+                    style="background:linear-gradient(135deg,rgba(0,102,255,0.1),rgba(124,58,237,0.1));border-color:rgba(0,212,255,0.25);">
+                    <h4 style="margin-bottom:0.75rem;">🔔 Alert Subscriptions</h4>
+                    <p style="font-size:0.8rem;margin-bottom:var(--sp-md);">Get real-time notifications for critical
+                        threats matching your wallets and chains.</p>
+                    <div class="input-group" style="margin-bottom:0.75rem;">
+                        <input class="input" type="email" placeholder="your@email.com"
+                            style="font-size:0.82rem;padding:0.6rem 0.75rem;" />
+                    </div>
+                    <button class="btn btn-primary" style="width:100%;"
+                        onclick="CS.toast('Alert subscription activated!','success')">Enable Alerts →</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container"></div>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/threat-feed.js"></script>
+</body>
+
+</html>
