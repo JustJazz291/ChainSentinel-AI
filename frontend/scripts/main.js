@@ -144,5 +144,58 @@ const style = document.createElement('style');
 style.textContent = '@keyframes ripple { to { transform: scale(2); opacity: 0; } }';
 document.head.appendChild(style);
 
+// ---- Malicious bug swarm on landing hero
+(function initBugSwarm() {
+  // Only run on landing page (hero grid background present)
+  const hero = document.querySelector('.grid-bg');
+  if (!hero) return;
+
+  const BUG_COUNT = 8;
+  const layer = document.createElement('div');
+  layer.className = 'bug-layer';
+  document.body.appendChild(layer);
+
+  const bugs = [];
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  for (let i = 0; i < BUG_COUNT; i++) {
+    const el = document.createElement('div');
+    el.className = 'bug-icon';
+    layer.appendChild(el);
+    bugs.push({
+      el,
+      angleOffset: (Math.PI * 2 * i) / BUG_COUNT,
+      radius: 40 + i * 8,
+      x: CS.rand(0, window.innerWidth),
+      y: CS.rand(0, window.innerHeight),
+      jitter: CS.rand(0.8, 1.4),
+    });
+  }
+
+  function animate() {
+    const t = performance.now() / 1000;
+    bugs.forEach((b, i) => {
+      const orbit = b.radius;
+      const angle = t * b.jitter + b.angleOffset;
+      const targetX = mouseX + Math.cos(angle) * orbit;
+      const targetY = mouseY + Math.sin(angle) * (orbit * 0.6);
+
+      b.x += (targetX - b.x) * 0.08;
+      b.y += (targetY - b.y) * 0.08;
+
+      b.el.style.transform = `translate3d(${b.x}px, ${b.y}px, 0)`;
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+
 console.log('%c🛡️ ChainSentinel AI — Prototype', 'color:#00d4ff;font-size:16px;font-weight:bold;');
 console.log('%cAI-powered Web3 Security Intelligence Platform', 'color:#8fa3c0;');
