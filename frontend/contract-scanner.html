@@ -43,7 +43,7 @@
     <div class="container" style="padding-bottom:var(--sp-3xl);">
 
         <!-- Input Card -->
-        <div class="card" style="max-width:800px;margin:0 auto var(--sp-xl);">
+        <div class="card" id="scanInputCard" style="max-width:800px;margin:0 auto var(--sp-xl);">
             <div style="display:flex;gap:var(--sp-sm);margin-bottom:var(--sp-lg);">
                 <button class="btn btn-primary btn-sm" id="tabAddr" onclick="switchTab('addr')">📍 Contract
                     Address</button>
@@ -80,7 +80,8 @@
             <div style="display:flex;gap:var(--sp-md);flex-wrap:wrap;">
                 <button class="btn btn-primary" id="scanBtn" onclick="startScan()" style="flex:1;">🔬 Analyze
                     Contract</button>
-                <button class="btn btn-ghost btn-sm" onclick="loadDemoContract()">📋 Load Demo</button>
+                <button class="btn btn-ghost btn-sm" onclick="loadDemoContract()">📋 Load Malicious Demo</button>
+                <button class="btn btn-ghost btn-sm" onclick="loadSafeDemo()">🛡️ Load Safe Demo</button>
             </div>
         </div>
 
